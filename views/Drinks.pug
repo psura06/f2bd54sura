@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  h1= title
+  - 
+   let results =[
+      {
+        "drink_Name": "Dr.pepper",
+        "shop": "Walmart",
+        "price": 1.29
+      },
+      {
+        "drink_Name": "Sprite",
+        "shop": "Hyvee",
+        "price": 2.99
+      },
+      {
+        "drink_Name": "Dite Coke",
+        "shop": "M P Mart",
+        "price": 2.79
+      },
+      {
+        "drink_Name": "7 up",
+        "shop": "Doller General",
+        "price": 3.29
+      },
+      {
+        "drink_Name": "Mountain Dew",
+        "shop": "Doller Tree",
+        "price": 1.79
+      }
+    ]
+  .container-fluid 
+    .row 
+      each Drinks  in results
+        div(class="col-sm-2" onclick=`buy(${results.indexOf(Drinks)})`) 
+          each value,key in Drinks 
+            = key+" : "+value
+            br
+  script.
+    function buy(index){
+      alert("You purchased item "+index)
+    }
