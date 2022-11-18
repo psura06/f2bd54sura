@@ -2,41 +2,21 @@ extends layout
 
 block content
   h1= title
-  - 
-   let results =[
-      {
-        "drink_Name": "Dr.pepper",
-        "shop": "Walmart",
-        "price": 1.29
-      },
-      {
-        "drink_Name": "Sprite",
-        "shop": "Hyvee",
-        "price": 2.99
-      },
-      {
-        "drink_Name": "Dite Coke",
-        "shop": "M P Mart",
-        "price": 2.79
-      },
-      {
-        "drink_Name": "7 up",
-        "shop": "Doller General",
-        "price": 3.29
-      },
-      {
-        "drink_Name": "Mountain Dew",
-        "shop": "Doller Tree",
-        "price": 1.79
-      }
-    ]
-  .container-fluid 
+  .container-fluid
     .row 
-      each Drinks  in results
-        div(class="col-sm-2" onclick=`buy(${results.indexOf(Drinks)})`) 
-          each value,key in Drinks 
-            = key+" : "+value
+    .m-1
+      each value,key in results
+        - let destination = `dispatch(\"/Drinks/update?id=${value._id}\")`
+        div(class="col-sm-2" onclick=`buy(${key})`)
+            = value.drink_Name+" "+value.shop+" "+value.price
             br
+        button.btn( class="btn-sm btn-outline-white btn-success  ml-1", onclick= destination) To Update Records
+
+  script.
+    function dispatch(path){
+      window.location.href=path
+    }      
+
   script.
     function buy(index){
       alert("You purchased item "+index)
