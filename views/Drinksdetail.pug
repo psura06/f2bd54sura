@@ -1,0 +1,26 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let Drinksid = toShow._id 
+  - let Drinksname = toShow.drink_Name
+  - let DrinksShop = toShow.shop 
+  - let DrinksPrice = toShow.price 
+  div 
+    div.row 
+      div(class='DrinksAttr mr-3 bg-light border border-dark rounded-2 shadow p-2  text-dark') Drinks ID is: 
+       div(class='DrinksAttr mr-3  bg-dark border border-dark rounded-2 shadow p-2  text-white')
+      div #{Drinksid} 
+    div.row 
+      div(class='DrinksAttr mr-3bg-light border border-dark rounded-3 shadow p-2  text-dark') Drinks Name is: 
+      div(class='DrinksAttr mr-3 bg-dark border border-dark rounded-2 shadow p-2   text-white')
+      div #{Drinksname} 
+    div.row 
+      div(class='DrinksAttr mr-3bg-light border border-dark rounded-3 shadow p-2  text-dark') Drinks Shop is: 
+      div(class='DrinksAttr mr-3 bg-dark border border-dark rounded-2 shadow p-2   text-white')
+      div #{DrinksShop} 
+    div.row 
+      div(class='DrinksAttr mr-3bg-light border border-dark rounded-3 shadow p-2  text-dark') Drinks price is: 
+       div(class='DrinksAttr mr-3 bg-dark border border-dark rounded-2 shadow p-2   text-white')
+      div #{DrinksPrice} 

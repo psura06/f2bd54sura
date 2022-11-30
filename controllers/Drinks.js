@@ -1,7 +1,7 @@
 var Drinks = require('../models/Drinks'); 
  
 // List of all Drinks
-exports.costume_list = function(req, res) { 
+exports.Drinks_list = function(req, res) { 
     res.send('NOT IMPLEMENTED: Drinks list'); 
 }; 
  
@@ -73,7 +73,7 @@ exports.Drinks_view_all_Page = async function(req, res) {
 }; 
 
 
-// for a specific Costume. 
+// for a specific Drinks. 
 exports.Drinks_detail = async function(req, res) { 
     console.log("detail"  + req.params.id) 
     try { 
@@ -104,3 +104,74 @@ exports.Drinks_update_put = async function(req, res) {
 failed`);
     }
 };
+
+// Handle Drinks delete on DELETE. 
+exports.Drinks_delete = async function(req, res) { 
+    console.log("delete "  + req.params.id) 
+    try { 
+        result = await Drinks.findByIdAndDelete( req.params.id) 
+        console.log("Removed " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": Error deleting ${err}}`); 
+    } 
+}; 
+
+// Handle a show one view with id specified by query 
+exports.Drinks_view_one_Page = async function(req, res) { 
+    console.log("single view for id"  + req.query.id) 
+    try{ 
+        result = await Drinks.findById( req.query.id) 
+        console.log(result) 
+        res.render('Drinksdetail',  { title: 'Drinks Detail', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+
+// Handle building the view for creating a Drinks. 
+// No body, no in path parameter, no query. 
+// Does not need to be async 
+exports.Drinks_create_Page =  function(req, res) { 
+    console.log("create view") 
+    try{ 
+        res.render('Drinkscreate', { title: 'Drinks Create'}); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+
+
+// Handle building the view for updating a Drinks. 
+// query provides the id 
+exports.Drinks_update_Page =  async function(req, res) { 
+    console.log("update view for item "+req.query.id) 
+    try{ 
+        let result = await Drinks.findById(req.query.id) 
+        res.render('Drinksupdate', { title: 'Drinks Update', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+};
+
+
+// Handle a delete one view with id from query 
+exports.Drinks_delete_Page = async function(req, res) { 
+    console.log("Delete view for id "  + req.query.id) 
+    try{ 
+        result = await Drinks.findById(req.query.id) 
+        res.render('Drinksdelete', { title: 'Drinks Delete', toShow: 
+result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 

@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+.DrinksAttr { 
+  background-color: rgb(195, 17, 17); 
+  width: 120px; 
+} 
